@@ -1,11 +1,20 @@
 const express = require('express')
+require('dotenv').config();
+const cors = require('cors');
+const {dbConnection} = require('./database/config')
 const app = express()
-const port = 3000
+// config cors
+app.use(cors());
+// base de datos 
+dbConnection();
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.json({
+    ok:true,
+    msg:'Hola Mundo'
+  })
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Example app listening on port ${process.env.PORT}`)
 })
